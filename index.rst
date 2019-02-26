@@ -10,7 +10,9 @@ Welcome to 开发工具's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   
+   tools/nuitka.rst
+   tools/pip.rst
+   tools/git.rst
 
 
 Indices and tables
