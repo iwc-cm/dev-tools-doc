@@ -186,7 +186,7 @@ pip每个子命令也有自己的独有选项。
 新版本配置文件位置
 
     * Linux: $HOME/.config/pip/pip.conf , 由XDG_CONFIG_HOME(默认 $HOME/.config)环境变量决定，
-    * windows: %APPDATA%\pip\pip.ini
+    * windows: %APPDATA%\\pip\\pip.ini
 
 配置文件格式
 -------------------------
@@ -209,9 +209,9 @@ pip每个子命令也有自己的独有选项。
 global配置
 
     一般都指定一个 global 配置，其中存放上面说的全局选项。
-    配置名称和长选项一样，比如上面 --index-url ，存放到配置里面就叫 index-url,
+    配置名称和长选项一样，比如上面 \-\-index-url ，存放到配置里面就叫 index-url,
 
-    执行pip，除非制定了--isolated，否则都会使用global中的配置。
+    执行pip，除非制定了 \-\-isolated，否则都会使用global中的配置。
 
 子命令配置
 
@@ -221,4 +221,4 @@ global配置
 
 执行 ``pip install django`` 等价于 ``pip install django --index-url=https://pypi.org/simple/ --timeout=10``
 
-执行 ``pip download django`` 等价于 ``pip install django --index-url=https://pypi.tuna.tsinghua.edu.cn/simple --timeout=20``
+执行 ``pip download django`` 等价于 ``pip download django --index-url=https://pypi.tuna.tsinghua.edu.cn/simple --timeout=20``

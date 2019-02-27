@@ -277,12 +277,41 @@ git项目下新建 ``.gitignore`` 文件，符合其中模式的文件名称，�
 ssh免密码
 ==================
 
-1. 打开github主页，个人信息 设置 界面
+github默认使用https连接进行远程仓库克隆，也可以切换为ssh。
+如果设置了ssh免密码，就可以在提交的时候不用再次输入密码。
+如下界面点击 ``use ssh`` 可以切换为ssh形式的url。
+
+.. image:: /_static/clone_ssh.jpg
+
+1. 打开github主页，个人信息 设置 界面.
+
+    .. image:: /_static/git_setting.jpg
+        :height: 350px
+
 #. 找到 ``SSH and GPG keys`` 配置
-#. 点击 ``New SSH Key`` 新建一个可信的key，
+#. 点击 ``New SSH Key`` 新建一个可信的key。
+
+    .. image:: /_static/git_ssh_setting.jpg
+
 #. 将本机的 ``$HOME/.ssh/id_rsa.pub`` 的内容拷贝进去。
 #. 如果没有 ``$HOME/.ssh/id_rsa.pub`` ，就使用 ``ssh-keygen`` 命令， 一路回车，生成一个 ssh key.
 
+
+场景案例
+==========================
+
+克隆代码
+-----------------------
+
+日常修改、提交
+-----------------------
+保持master是干净的
+
+同步代码到远程
+-----------------------
+
+基于别人的代码上开发
+--------------------------
 
 个人主页
 =====================
