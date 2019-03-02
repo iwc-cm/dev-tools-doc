@@ -13,6 +13,7 @@ Welcome to 开发工具's documentation!
    tools/nuitka.rst
    tools/pip.rst
    tools/git.rst
+   develop/fabric.rst
 
 
 Indices and tables

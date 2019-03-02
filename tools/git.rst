@@ -140,6 +140,8 @@ github做的事情，只不过是把这个文件夹放到网络上共享出来�
 
 将(origin)远程仓库代码同步到本地仓库:
 
+::
+
     git fetch origin
 
 同步完后，可以看到当前文件夹并没有多出文件，仍然是空文件夹，
@@ -165,7 +167,7 @@ github做的事情，只不过是把这个文件夹放到网络上共享出来�
     git branch -a
     # out: remotes/origin/master
 
-因为 ``.git`` 文件夹会保存所有的**本地分支**和**远程分支**的信息，所以先忽略远程仓库，只考虑 .git 中存放的远程分支信息。
+因为 ``.git`` 文件夹会保存所有的 **本地分支** 和 **远程分支** 的信息，所以先忽略远程仓库，只考虑 .git 中存放的远程分支信息。
 如下:
 
 .. image:: /_static/git_fetch2.jpg
@@ -209,6 +211,7 @@ github做的事情，只不过是把这个文件夹放到网络上共享出来�
 
 将远程仓库origin的master分支的所有更新下载到本地
 *****************************************************
+
 ::
 
     git fetch origin master
@@ -303,15 +306,84 @@ github默认使用https连接进行远程仓库克隆，也可以切换为ssh。
 克隆代码
 -----------------------
 
+直接克隆github上的代码，并自动建立本地仓库和远程仓库的映射。
+
+::
+
+    git clone https://github.com/iwc-cm/dev-tools-doc.git
+
+等价于::
+
+    mkdir dev-tools-doc && cd dev-tools-doc
+    git remote add origin https://github.com/iwc-cm/dev-tools-doc.git
+    git fetch origin
+    git checkout -b master origin/master
+
+
 日常修改、提交
 -----------------------
-保持master是干净的
+
+git仓库中有一个比较特殊的分支: master. 一般使用这个分支作为最终稳定版本的分支，也就是说所有代码最后都会提交到这上面去。
+
+所以，有一个准则: 保持master是干净的。不要直接修改master的代码，而是 git branch 创建一个分支，在分支上修改代码，
+然后使用 git merge 将分支代码合并到master然后push到远程。
+
+::
+
+    git branch bug  # 新建名为bug的分支
+    git checkout bug # 切换到新分支
+    # ...这里做一些修改，修改完后执行后面的操作
+    # ...
+    # ...
+
+    git commit -m "xxx'  # 提交代码到bug分支
+
+    # 重新切换到master并合并代码
+    git checkout master 
+    git merge bug
 
 同步代码到远程
 -----------------------
 
+最简单的形式
+::
+
+    git push origin  # 推送到远程origin仓库
+
+如果是多人开发，直接推送可能会有冲突，不过git自己也会检测冲突，防止你推送。
+
+为了避免这种情况，最好先同步远程分支, 解决冲突。
+
+::
+
+    git fetch origin
+    git merge origin/master
+
+    git push origin
+
+
+
 基于别人的代码上开发
 --------------------------
+
+因为别人的项目，我们一般都没有权限，所以需要fork称为自己的项目。
+
+1. 在github界面上fork别人的代码，自己的目录下就会有一个同名的项目。
+2. 按照正常的流程修改提交。因为这时已经是自己的目录了。
+3. 修改完成后，想把自己的修改合并到别人的项目，就在github界面发起pull request。
+
+    发起pull request之前，最好同步一下别人的修改，以免pull request冲突了。
+    下面用 ``other-url`` 代替别人的url路径。
+
+    ::
+
+        git remote add other <other-url>
+        git fetch other
+        git merge other/master
+
+        git push origin
+
+4. 等待项目拥有者 review 代码，如果没问题他就会点击同意，就合并上去了。
 
 个人主页
 =====================
