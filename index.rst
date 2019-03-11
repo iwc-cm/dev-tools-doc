@@ -14,6 +14,7 @@ Welcome to 开发工具's documentation!
    tools/pip.rst
    tools/git.rst
    develop/fabric.rst
+   develop/decorator.rst
 
 
 Indices and tables
