@@ -123,7 +123,7 @@ requirements描述文件不仅可以用于 ``pip install`` ,
 借助以下两个选项:
 
 * --no-index: 不要使用任何远程pip源，也就是不联网下载库。
-* -f, --find-links <path>: 将某个路径作为源，可以使本地目录。
+* -f, --find-links <path>: 将某个路径作为源，可以是本地路径或者远程url。
 
 
 ::
@@ -179,7 +179,7 @@ pip每个子命令也有自己的独有选项。
 老版本pip配置文件位置
 
     * Linux: $HOME/.pip/pip.conf
-    * windows: %HOME%\pip\pip.ini
+    * windows: %HOME%\\pip\\pip.ini
 
     也可以通过环境变量 PIP_CONFIG_FILE 指定一个默认位置。
 
@@ -206,6 +206,9 @@ pip每个子命令也有自己的独有选项。
     [download]
     timeout = 20
 
+pip 有很多子命令，如 install/download ，每个子命令有自己独有的选项，所有子命令也会共享一些全局选项。
+所以配置也分为全局和子命令独占的两种形式
+
 global配置
 
     一般都指定一个 global 配置，其中存放上面说的全局选项。
@@ -216,8 +219,8 @@ global配置
 子命令配置
 
     上面案例中， 当执行 pip install 子命令时，除了使用global配置，还会使用 install中的配置， 
-    如果install和global配置冲突了，优先使用install配置，
-    并且install中还可以存放 pip install 子命令的独有配置
+    如果 install 和 global 配置冲突了，优先使用子命令 install 配置，
+    并且 install 中还可以存放 pip install 子命令的独有配置
 
 执行 ``pip install django`` 等价于 ``pip install django --index-url=https://pypi.org/simple/ --timeout=10``
 

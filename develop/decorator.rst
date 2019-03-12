@@ -95,32 +95,41 @@ Python 中，函数也是一个对象。可以在一个函数中返回另外一�
 
 实际上上面的最后一种实现方式就是装饰器。
 
-对照上面的catch_except感受一下他的定义: 装饰器本身是一个函数，它接受另外一个函数，将其修改后返回。
+对照上面的catch_except感受一下他的定义: 装饰器本身是一个函数，它接受另外一个函数，将其修改后返回包装后的函数，替换原函数。
 
 装饰器是一种语法糖，借助于装饰器，我们没有必要像上面一样每次调用divide之前先使用 catch_except 包装一下 ``func = catch_except(divide)`` ,
-而是改成下面的写法。使用 ``@``
+而是改成下面的写法。使用 ``@`` 。 顺便加一些打印看看执行流程
 
-这样做的好处也显而易见，完全不会更改 divide 函数的定义， 而且以前调用divide的地方也不用修改任何代码。
 
 ::
 
     def catch_except(func):
         def _inner_func(*args, **kwargs):
             try:
-                return func(*args, **kwargs)
+                print("enter _inner_func")
+                ret = func(*args, **kwargs)
+                print("leave _inner_func")
+                return ret
             except:
                 return None
         return _inner_func
 
     @catch_except
     def divide(one, two):
+        print("enter divide")
         return one/two
 
     # 现在可以直接调用divide，等价于使用 catch_except 封装了一下。
-    # func = catch_except(divide)
-    divide(4, 2) # out: 2
-    divide(4, 0) # out: None
+    divide(4, 2) 
+    # enter _inner_func
+    # enter divide
+    # leave _inner_func
+    # out: 2
+    divide(4, 0) 
+    # 打印省略 ...
+    # out: None
 
+这样做的好处也显而易见，完全不会更改 divide 函数的定义， 而且以前调用divide的地方也不用修改任何代码。
 
 装饰器函数
 =================================
@@ -150,7 +159,7 @@ Python 中，函数也是一个对象。可以在一个函数中返回另外一�
 装饰成员函数
 =============================
 
-类的成员函数和普通函数有点不同，普通函数永远都是普通函数。而类的方法有两种不同的状态
+类的成员函数和普通函数有点不同。普通函数一般永远都是普通函数，而类的方法有两种不同的状态
 
 1. 定义一个class的时候，class上的方法仅仅是普通函数。(状态一)
 2. 使用一个class实例化生成对象后，会将class的方法绑定到生成的对象上。 （状态二）
@@ -170,12 +179,13 @@ Python 中，函数也是一个对象。可以在一个函数中返回另外一�
     mc = MyCalc(4, 2)
     mc.divide()
 
-    # 以状态一的身份调用 MyCalc.divide ，需要显示提供第一个self参数
+    # 以状态一的身份调用 MyCalc.divide ，需要显式提供第一个self参数
     MyCalc.divide(mc)
 
 装饰器发生作用的时候是在状态一。
 
-换句话说，类的成员函数可以当做普通函数传入装饰器。两者并没有区别。
+换句话说，类的成员函数可以当做普通函数传入装饰器。两者并没有区别, 
+只不过需要稍微注意，self也是算作参数的。
 
 ::
 
