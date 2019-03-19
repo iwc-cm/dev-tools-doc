@@ -16,6 +16,8 @@ Welcome to 开发工具's documentation!
    tools/git.rst
    develop/fabric.rst
    develop/decorator.rst
+   develop/regex.rst
+   develop/coroutine.rst
 
 
 Indices and tables
