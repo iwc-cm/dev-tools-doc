@@ -74,4 +74,7 @@
 #. yaml
 
 #. jsonnet
+#. jpype
+#. types
+
 
