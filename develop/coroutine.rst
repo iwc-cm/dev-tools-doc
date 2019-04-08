@@ -244,17 +244,16 @@ Future创建初始状态是 pending，执行结束后状态会转换到 cancelle
 
         # 循环遍历每一个协程。等待Future对象。
         while future_list:
-            old_future = []
-            new_future = []
+            new_futures = []
             for future, coroutine in future_list:
-                if future_list.done():
+                if future.done():
                     try:
-                        new_future.append((next(coroutine), coroutine))
+                        new_futures.append((next(coroutine), coroutine))
                     except StopIteration:
                         pass
                 else:
-                    old_future.append((future, coroutine))
-            future_list = old_future + new_future
+                    new_futures.append((future, coroutine))
+            future_list = new_futures
 
 
 这段代码可以大致理解协程的工作方式，其中的Future是使用线程实现的异步，实际上Python原生的协程并非使用线程实现。

@@ -63,13 +63,17 @@ ssh免密码登录
 深度学习设置 gpu id
 ==============================
 
-# 查看gpu信息
-nvidia-smi
+查看gpu信息::
 
-# 使程序识别的gpu id 和nvidia显示的一致。
-export CUDA_DEVICE_ORDER=PCI_BUS_ID
-# 设置使用的gpu。
-export CUDA_VISIBLE_DEVICES=0
+    nvidia-smi
+
+使程序识别的gpu id 和nvidia显示的一致::
+
+    export CUDA_DEVICE_ORDER=PCI_BUS_ID
+
+设置使用的gpu::
+    
+    export CUDA_VISIBLE_DEVICES=0
 
 https://discuss.pytorch.org/t/gpu-devices-nvidia-smi-and-cuda-get-device-name-output-appear-inconsistent/13150
 

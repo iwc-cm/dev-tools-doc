@@ -77,4 +77,7 @@
 #. jpype
 #. types
 
-
+#. mongo
+#. postgresql
+#. SQLAlchemy
+#. swig/cffi
